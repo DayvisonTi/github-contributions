@@ -1,0 +1,30 @@
+name: Gerar Gráfico de Contribuições
+
+on:
+  push:
+    branches:
+      - main  # Ajuste conforme o nome do seu branch principal
+  schedule:
+    - cron: "0 0 * * *"  # Ajuste o cronograma conforme necessário, este exemplo é diário à meia-noite UTC
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do Código
+        uses: actions/checkout@v2
+
+      - name: Gerar Gráfico de Contribuições
+        uses: Platane/snk@v3.2.0
+        with:
+          github_user_name: DayvisonTi  # Seu nome de usuário do GitHub
+          outputs: dist/snake.svg  # Corrigindo o nome do parâmetro
+
+      - name: Adicionar gráfico de contribuições
+        run: |
+          git config --local user.name "github-actions[bot]"
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Atualizar gráfico de contribuições com cobrinha" || echo "Nenhuma mudança para commitar"
+          git push
