@@ -22,9 +22,11 @@ jobs:
           outputs: dist/snake.svg
 
       - name: Adicionar gráfico de contribuições
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
         run: |
           git config --local user.name "github-actions[bot]"
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A
           git commit -m "Atualizar gráfico de contribuições com cobrinha" || echo "Nenhuma mudança para commitar"
-          git push
+          git push https://DayvisonTi:${{ secrets.PAT_TOKEN }}@github.com/DayvisonTi/github-contributions.git main
