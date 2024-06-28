@@ -1,0 +1,21 @@
+name: Gerar Jogo Snake a partir do GitHub Contribution Grid
+
+on:
+  push:
+    branches:
+      - main  # ajuste conforme o nome do branch principal do seu repositório
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Generate Snake
+        uses: Platane/snk@v3.2.0
+        with:
+          github_user_name: ${{ github.actor }}
+          svg_out_path: dist/github-contribution-grid-snake.svg
+
+            
