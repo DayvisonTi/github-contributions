@@ -18,8 +18,8 @@ jobs:
       - name: Gerar Gráfico de Contribuições
         uses: Platane/snk@v3.2.0
         with:
-          github_user_name: DayvisonTi  # Seu nome de usuário do GitHub
-          outputs: dist/snake.svg  # Corrigindo o nome do parâmetro
+          github_user_name: DayvisonTi  # Substitua pelo seu nome de usuário do GitHub
+          outputs: dist/snake.svg
 
       - name: Adicionar gráfico de contribuições
         run: |
