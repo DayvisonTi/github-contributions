@@ -30,3 +30,4 @@ jobs:
           git add -A
           git commit -m "Atualizar gráfico de contribuições com cobrinha" || echo "Nenhuma mudança para commitar"
           git push https://DayvisonTi:${{ secrets.PAT_TOKEN }}@github.com/DayvisonTi/github-contributions.git main
+
