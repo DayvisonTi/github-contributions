@@ -21,7 +21,7 @@ jobs:
           github_user_name: DayvisonTi  # Substitua pelo seu nome de usuário do GitHub
           outputs: dist/snake.svg
 
-      - name: Adicionar gráfico de contribuições
+      - name: Commit e Push das Alterações
         env:
           GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
         run: |
@@ -29,6 +29,7 @@ jobs:
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A
           git commit -m "Atualizar gráfico de contribuições com cobrinha" || echo "Nenhuma mudança para commitar"
-          git push https://${{ secrets.PAT_TOKEN }}@github.com/DayvisonTi/github-contributions.git main
+          git push
+
 
 
