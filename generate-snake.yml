@@ -1,21 +1,32 @@
-name: Gerar Jogo Snake a partir do GitHub Contribution Grid
+name: Generate Snake
 
 on:
   push:
     branches:
-      - main  # ajuste conforme o nome do branch principal do seu repositório
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v2
-
-      - name: Generate Snake
-        uses: Platane/snk@v3.2.0
+      - name: Set up Python
+        uses: actions/setup-python@v2
         with:
-          github_user_name: ${{ github.actor }}
-          svg_out_path: dist/github-contribution-grid-snake.svg
-
-            
+          python-version: '3.x'  # Escolha a versão do Python que você deseja usar
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt  # Se necessário, ajuste conforme suas dependências
+      - name: Run script to generate snake
+        run: python generate_snake.py  # Ajuste conforme o nome do seu script
+      - name: Commit changes
+        run: |
+          git config --local user.email "seu-email@example.com"
+          git config --local user.name "seu-username"
+          git add .
+          git commit -m "Add generated snake graph"
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
